@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/",                  "dest": "/index.html" },
+    { "src": "/blueprint",         "dest": "/pages/blueprint.html" },
+    { "src": "/master-prompt",     "dest": "/pages/master-prompt.html" },
+    { "src": "/domain-walkthrough","dest": "/pages/domain-walkthrough.html" },
+    { "src": "/thank-you",         "dest": "/pages/thank-you.html" }
+  ]
+}

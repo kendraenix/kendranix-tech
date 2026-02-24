@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kendra Nix | Fractional Chief of Staff</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fuchsia: #D91E6B;
+    --navy: #3B4A6B;
+    --gold: #D4AF37;
+    --teal: #4DA6A0;
+    --white: #FFFFFF;
+    --charcoal: #2D2D3A;
+    --bg: #FAFAF8;
+    --card-bg: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--charcoal);
+    padding: 0 16px 60px;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 0%, rgba(217,30,107,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(77,166,160,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    text-align: center;
+    padding: 52px 0 36px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 0 4px white, 0 0 0 6px var(--gold), 0 12px 40px rgba(217,30,107,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212,175,55,0.4);
+    animation: pulse 3s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--fuchsia);
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .gold-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 14px;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--charcoal);
+    opacity: 0.75;
+  }
+
+  /* ---- SECTION LABELS ---- */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 14px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .section-label span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .section-label.teal span { color: var(--teal); }
+  .section-label.gold span { color: var(--gold); }
+
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+  }
+
+  .section-label.teal::before,
+  .section-label.teal::after { background: rgba(77,166,160,0.25); }
+  .section-label.gold::before,
+  .section-label.gold::after { background: rgba(212,175,55,0.35); }
+
+  /* ---- CARDS ---- */
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(59,74,107,0.08);
+    box-shadow: 0 2px 12px rgba(59,74,107,0.06);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 14px 0 0 14px;
+    background: var(--fuchsia);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(59,74,107,0.13);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(217,30,107,0.06);
+    border-radius: 10px;
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: var(--charcoal);
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+
+  .card-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--fuchsia);
+    flex-shrink: 0;
+  }
+
+  .card-arrow {
+    color: var(--navy);
+    opacity: 0.3;
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .card:hover .card-arrow {
+    opacity: 0.7;
+    transform: translateX(3px);
+  }
+
+  /* FREE resource cards — teal accent */
+  .card.free::before { background: var(--teal); }
+  .card.free .card-icon { background: rgba(77,166,160,0.08); }
+
+  /* AFFILIATE cards — gold accent */
+  .card.affiliate {
+    border-color: rgba(212,175,55,0.2);
+    background: linear-gradient(135deg, #fffef8, #ffffff);
+  }
+  .card.affiliate::before { background: var(--gold); }
+  .card.affiliate .card-icon { background: rgba(212,175,55,0.1); }
+
+  .affiliate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(212,175,55,0.12);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 20px;
+    padding: 2px 7px;
+    margin-top: 4px;
+  }
+
+  /* SOCIAL cards */
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-decoration: none;
+    border: 1px solid rgba(59,74,107,0.08);
+    box-shadow: 0 2px 12px rgba(59,74,107,0.05);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .social-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(59,74,107,0.12);
+  }
+
+  .social-card .s-icon { font-size: 24px; }
+
+  .social-card .s-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .social-card.wide {
+    grid-column: span 2;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding-top: 36px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  .footer-logo .f-kendra { color: var(--fuchsia); }
+  .footer-logo .f-nix { color: var(--navy); }
+
+  footer p {
+    font-size: 11px;
+    color: var(--charcoal);
+    opacity: 0.5;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .gold-dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin: 0 6px;
+    vertical-align: middle;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Staggered delays */
+  .hero { animation-delay: 0s; }
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.18s; }
+  .d3 { animation-delay: 0.26s; }
+  .d4 { animation-delay: 0.34s; }
+  .d5 { animation-delay: 0.42s; }
+  .d6 { animation-delay: 0.5s; }
+  .d7 { animation-delay: 0.58s; }
+  .d8 { animation-delay: 0.66s; }
+  .d9 { animation-delay: 0.74s; }
+  .d10 { animation-delay: 0.82s; }
+  .d11 { animation-delay: 0.9s; }
+  .d12 { animation-delay: 0.98s; }
+  .d13 { animation-delay: 1.06s; }
+  .d14 { animation-delay: 1.14s; }
+  .d15 { animation-delay: 1.22s; }
+  .d16 { animation-delay: 1.30s; }
+  .d17 { animation-delay: 1.38s; }
+  .d18 { animation-delay: 1.46s; }
+
+  /* ---- EMAIL OPT-IN ---- */
+  .optin-card {
+    background: linear-gradient(135deg, var(--navy) 0%, #2a3650 100%);
+    border-radius: 18px;
+    padding: 28px 24px;
+    margin: 8px 0 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    box-shadow: 0 12px 40px rgba(59,74,107,0.25);
+  }
+
+  .optin-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--fuchsia), var(--gold), var(--teal));
+  }
+
+  .optin-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(217,30,107,0.08);
+    pointer-events: none;
+  }
+
+  .optin-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .optin-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .optin-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .optin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .optin-input {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: white;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+
+  .optin-input::placeholder { color: rgba(255,255,255,0.35); }
+
+  .optin-input:focus {
+    border-color: var(--fuchsia);
+    background: rgba(255,255,255,0.12);
+  }
+
+  .optin-btn {
+    background: linear-gradient(135deg, var(--fuchsia), #b01858);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(217,30,107,0.35);
+  }
+
+  .optin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(217,30,107,0.5);
+  }
+
+  .optin-btn:active { transform: translateY(0); }
+
+  .optin-fine {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.3px;
+  }
+
+  .optin-success {
+    display: none;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="avatar"><img src="https://kendranix.com/wp-content/uploads/2023/10/1.png" alt="Kendra Nix" style="width:100px;height:100px;border-radius:50%;object-fit:cover;display:block;" /></div>
+    <div class="hero-name">Kendra Nix</div>
+    <div class="hero-title">Fractional Chief of Staff for Mompreneurs</div>
+    <div class="gold-line"></div>
+    <div class="hero-tagline">"Stop hustling. Start systematizing."</div>
+  </div>
+
+  <!-- FREE RESOURCES -->
+  <div class="section-label teal d1">
+    <span>Free Resources</span>
+  </div>
+
+  <a href="https://fifteen-hour.lovable.app" class="card free d2">
+    <div class="card-icon">🎯</div>
+    <div class="card-body">
+      <div class="card-title">The 15-Hour Work Week Audit</div>
+      <div class="card-sub">Find exactly where your time is leaking</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://kendranix.com/mom-math-calculator/" class="card free d3">
+    <div class="card-icon">🧮</div>
+    <div class="card-body">
+      <div class="card-title">Mom Math Calculator</div>
+      <div class="card-sub">See what your time is ACTUALLY costing you</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <!-- WORK WITH ME -->
+  <div class="section-label teal d4">
+    <span>Work With Me</span>
+  </div>
+
+  <a href="https://app.paperbell.com/checkout/packages/201252" class="card d5">
+    <div class="card-icon">💼</div>
+    <div class="card-body">
+      <div class="card-title">Operations Audit + 90-Day Roadmap</div>
+      <div class="card-sub">Custom systems assessment & implementation plan</div>
+    </div>
+    <div class="card-price">$1,500</div>
+  </a>
+
+  <a href="https://kendranix.com/services" class="card d6">
+    <div class="card-icon">⚡</div>
+    <div class="card-body">
+      <div class="card-title">Backend Buildout VIP Intensive</div>
+      <div class="card-sub">Complete done-for-you AI systems in 4–6 weeks</div>
+    </div>
+    <div class="card-price">$6K–$8K</div>
+  </a>
+
+  <a href="https://kendranix.com/services" class="card d7">
+    <div class="card-icon">👑</div>
+    <div class="card-body">
+      <div class="card-title">Fractional Chief of Staff Retainer</div>
+      <div class="card-sub">Ongoing strategic operations support</div>
+    </div>
+    <div class="card-price">$3K–$5K/mo</div>
+  </a>
+
+  <!-- EMAIL OPTIN -->
+  <div class="optin-card d8">
+    <div class="optin-eyebrow">✉️ Join the Newsletter</div>
+    <div class="optin-headline">Strategy that actually moves the needle.</div>
+    <div class="optin-sub">Weekly ops insights, Mom Math breakdowns, and AI automation tips — straight to your inbox. No fluff. No filler.</div>
+    <form class="optin-form" onsubmit="handleOptin(event)" action="https://app.kit.com/forms/6414531/subscriptions" method="post">
+      <input type="text" name="fields[first_name]" placeholder="First name" class="optin-input" required />
+      <input type="email" name="email_address" placeholder="Your best email" class="optin-input" required />
+      <button type="submit" class="optin-btn">Yes, I Want In →</button>
+    </form>
+    <div class="optin-fine">No spam. Unsubscribe anytime. Your info stays safe.</div>
+    <div class="optin-success" id="optinSuccess">🎉 You're in! Check your inbox.</div>
+  </div>
+
+  <!-- LEARN -->
+  <div class="section-label teal d9">
+    <span>Learn</span>
+  </div>
+
+  <a href="https://kendranix.com/services" class="card d9">
+    <div class="card-icon">📚</div>
+    <div class="card-body">
+      <div class="card-title">Flow & Glow Method Course</div>
+      <div class="card-sub">DIY AI-powered operations — self-paced</div>
+    </div>
+    <div class="card-price">$497</div>
+  </a>
+
+  <!-- AFFILIATES -->
+  <div class="section-label gold d10">
+    <span>Tools I Use & Love</span>
+  </div>
+
+  <p style="font-size:12px; color:var(--charcoal); opacity:0.6; margin-bottom:14px; line-height:1.6; animation: fadeUp 0.6s ease 1.02s forwards; opacity:0;">
+    These are the exact tools powering my business and my clients' systems. Some links are affiliate links — I only recommend what I actually use.
+  </p>
+
+  <a href="https://www.gohighlevel.com/?fp_ref=kendra24" class="card affiliate d11">
+    <div class="card-icon">🤖</div>
+    <div class="card-body">
+      <div class="card-title">Go High Level</div>
+      <div class="card-sub">My all-in-one CRM & automation platform</div>
+      <div class="affiliate-badge">★ Affiliate</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://descript.cello.so/jkM9kCJZpVs" class="card affiliate d12">
+    <div class="card-icon">🎬</div>
+    <div class="card-body">
+      <div class="card-title">Descript</div>
+      <div class="card-sub">How I edit videos in half the time</div>
+      <div class="affiliate-badge">★ Affiliate</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://lovable.dev/invite/G1TMGYJ" class="card affiliate d13">
+    <div class="card-icon">🧱</div>
+    <div class="card-body">
+      <div class="card-title">Lovable</div>
+      <div class="card-sub">Build apps without code</div>
+      <div class="affiliate-badge">★ Affiliate</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://aurainc.sjv.io/zzgax0" class="card affiliate d14">
+    <div class="card-icon">🛡️</div>
+    <div class="card-body">
+      <div class="card-title">Aura Identity Theft Protection</div>
+      <div class="card-sub">Protect yourself & your business data</div>
+      <div class="affiliate-badge">★ Affiliate</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <!-- CONNECT -->
+  <div class="section-label teal d16">
+    <span>Connect</span>
+  </div>
+
+  <div class="social-grid">
+    <a href="https://YouTube.com/@kendranix" target="_blank" class="social-card d16">
+      <span class="s-icon">📺</span>
+      <span class="s-label">YouTube</span>
+    </a>
+    <a href="https://www.linkedin.com/in/kendranix?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="social-card d16">
+      <span class="s-icon">💼</span>
+      <span class="s-label">LinkedIn</span>
+    </a>
+    <a href="https://www.facebook.com/share/1CFsNR3CLy/?mibextid=wwXIfr" target="_blank" class="social-card d16">
+      <span class="s-icon">📘</span>
+      <span class="s-label">Facebook</span>
+    </a>
+    <a href="https://www.instagram.com/kendraenix?igsh=YjMzNGxreDVjZWtr&utm_source=qr" target="_blank" class="social-card d16">
+      <span class="s-icon">📸</span>
+      <span class="s-label">Instagram<br><span style="font-weight:400;opacity:0.6;">@kendraenix</span></span>
+    </a>
+    <a href="https://www.threads.com/@kendraenix?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="social-card wide d16">
+      <span class="s-icon">🧵</span>
+      <span class="s-label">Threads</span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="d17">
+    <div class="footer-logo">
+      <span class="f-kendra">Kendra</span> <span class="f-nix">Nix</span>
+    </div>
+    <p>
+      © 2026 Kendra Nix<span class="gold-dot"></span>Fractional Chief of Staff<span class="gold-dot"></span>kendranix.com
+    </p>
+    <p style="margin-top:10px; font-size:10px; opacity:0.4;">
+      This page contains affiliate links. I earn a commission at no additional cost to you when you purchase through my links.
+    </p>
+  </footer>
+
+</div>
+<script>
+  function handleOptin(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch('https://app.kit.com/forms/6414531/subscriptions', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(() => {
+      form.style.display = 'none';
+      document.getElementById('optinSuccess').style.display = 'block';
+    }).catch(() => {
+      form.style.display = 'none';
+      document.getElementById('optinSuccess').style.display = 'block';
+    });
+  }
+</script>
+</body>
+</html>
